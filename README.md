@@ -17,5 +17,5 @@ NAC é uma API para conexão entre aplicações do tipo client/server baseada em
 * Transporte de dados
 * Conexão unilateral e bilateral
 
-Nssa fase de estudos e desenvolvimento usaremos o Javascript (Node) do lado client e PHP e C# no lado Server.
-Exemplos e códigos nessas linguagens estão disponíveis para testes e utilização, neste mesmo repositório.
+Nessa fase de estudos e desenvolvimento usaremos o Javascript (Node) do lado client e PHP e C# no lado Server.
+Exemplos e códigos nessas linguagens estão disponíveis para testes e utilização, em repositórios próprios no W5Team.
