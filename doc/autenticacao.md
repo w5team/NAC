@@ -5,10 +5,10 @@ Esse é o ponto mais vulnerável do NAC. A responsabilidae de autenticar um aces
 Enquanto não descobrimos um método melhor, vamos esperar (pelo menos) que a sua conexão esteja sendo feita em SSL (https:// . . .). Vamos usar sobre essa camada uma criptografia (fraca) RSS com chave publica/privada.
 
 
-Chamada | Método | Transporte
---------|--------|-----------
-getkey|GET|envia a chave pública RSS 
-login|POST|recebe o login, senha e token criptografados RSS
+Chamada | Método | Cliente | Servidor
+--------|--------|---------|---
+getkey|GET|solicita|envia a chave pública RSS 
+login|POST|envia o login, senha e token criptografados com a chave pública|processa o login e retorna error/success (+ dados)
 
 Vamos analizar o passo-a-passo do processo de login.
 
@@ -32,4 +32,4 @@ Os parâmetros com as informações do usuário, por padrão, são os seguintes:
 * User Name;
 * User Level.
 
-Outros parâmetros podem ser inseridos seguinda necessidades específicas do projeto desenvolvido ou solicitando diretamente a API do servidor.
+Outros parâmetros podem ser inseridos conforme as necessidades específicas do projeto desenvolvido ou solicitando diretamente a API do servidor, em chamada posterior.
