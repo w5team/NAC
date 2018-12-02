@@ -33,3 +33,18 @@ Os parâmetros com as informações do usuário, por padrão, são os seguintes:
 * User Level.
 
 Outros parâmetros podem ser inseridos conforme as necessidades específicas do projeto desenvolvido ou solicitando diretamente a API do servidor, em chamada posterior.
+
+## Ping & Pong
+Para manter o usuário com status de conectado e, consequentemente o **token** válido, é necessário fazer uma chamada ao servidor NAC em um determinado intervalo de tempo. Isso é necessário caso não haja nenhuma outra atividade com o servidor dentro desse período de tempo.
+
+Por default, o tempo configurado é de *30 segundos* (BD user.**life**). Excedido, um novo processo de login deverá ser iniciado.
+
+Chamada | Método | Cliente | Servidor
+--------|--------|---------|---
+ping|GET|solicita|retorna o **token** (+dados extras)
+
+Os *"dados extras"* são opcionais e, dependendo da aplicação, para a notificação de novas mensagens e avisos do sistema.
+
+O **ping** só é relevante nas aplicações do tipo *unilaterais*, onde a ação sempre parte do cliente para o servidor (web tradicional). Veja mais detalhes em [Tipo de conexão](https://github.com/w5team/NAC/blob/master/doc/tipoconexao.md).
+
+
