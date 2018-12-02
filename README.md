@@ -2,13 +2,11 @@
 
 **N**etwork **A**pi for client and server **C**onnection
 
----
 
->For the time being, the language used in documentation is predominantly in Brazilian Portuguese. If there is interest (request) the translation will be initiated, based on contribution of type Creative Communs.
 
->***We're sorry.***
+> For the time being, the language used in documentation is predominantly in Brazilian Portuguese. If there is interest (request) the translation will be initiated, based on contribution of type Creative Communs.
 
----
+
 
 NAC é uma API para conexão entre aplicações do tipo client/server baseada em protocolo HTTP de internet com implementação de segurança por AES/RSA e dados em formato JSON.
 
