@@ -9,3 +9,8 @@ Pegamos a chave pública acessando a NAC: ```https://site.com/getkey``` e obtemo
 Antes, porém, criamos uma chave aleatória de no máximo 40 caracteres para o processo posterior - encriptação AES.
 
 Agora, empacotados em RSS com a chave pública, enviamos os dados para a NAC pelo link ```https://site.com/login``` usando "POST" para transportar os dados.
+
+Chamada | Método | Transporte
+--------|--------|-----------
+getkey|GET|envia a chave pública RSS 
+login|POST|recebe o login, senha e token criptografados RSS
