@@ -26,3 +26,6 @@ Chamada|Método|Url
 search|GET|https://server.nac/produtos/search?d=BLOCOBASE64...
 
 Aí você deve estar pensando: como vou passar os parâmetros "reais" da requisição?
+
+---
+--- coming soon ---
