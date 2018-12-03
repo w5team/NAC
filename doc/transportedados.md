@@ -15,7 +15,7 @@ Até aqui tudo normal.
 
 Mas agora vamos considerar que já estamos logados e os dados devem trafegar encriptografado. Logicamente, não podemos fazer o transporte dos dados diretamente no método GET. Esporíamos parte da informação.
 
-#### Então, como seria?
+### Então, como seria?
 
 O produto da criptografia é um bloco de bits codificado em Base64 para facilitar o transporte pelo padrão HTTP. Este bloco contém todos os dados necessários para que o servidor consiga trabalhar a requisição e retornar (também um bloco criptografado) os dados relevantes.
 
@@ -26,6 +26,18 @@ Chamada|Método|Url
 search|GET|https://server.nac/produtos/search?d=BLOCOBASE64...
 
 Aí você deve estar pensando: como vou passar os parâmetros "reais" da requisição?
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
 
 ---
 --- coming soon ---
