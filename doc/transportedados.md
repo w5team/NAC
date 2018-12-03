@@ -64,7 +64,7 @@ Para um resultado paginado, passamos:
 	rpp: 10
 }
 ```
-Com isso obtemos a página (page) 3 de um conjunto de 10 resultados por página (rpp).
+Com isso obtemos a página (page) 3 de um conjunto de 10 resultados por página (rpp = row per page).
 
 O servidor respnderá com o seguinte JSON (depois de todo o processo de transporte visto anteriormente):
 
