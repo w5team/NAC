@@ -1,38 +1,52 @@
 # Autenticação
 
-Esse é o ponto mais vulnerável do NAC. A responsabilidae de autenticar um acesso ainda em ambiente aberto (não criptografado) e a fragilidade do tradicional par **login** & **senha** abre possibilidades de ataques quase inevitáveis!
+Esse é o ponto mais vulnerável do NAC. A responsabilidae de autenticar um acesso ainda em ambiente aberto (não criptografado) e a fragilidade do tradicional par **login** & **senha** abrindo possibilidade de ataques quase inevitáveis!
 
-Enquanto não descobrimos um método melhor, vamos esperar (pelo menos) que a sua conexão esteja sendo feita em SSL (https:// . . .). Vamos usar sobre essa camada uma criptografia (fraca) RSS com chave publica/privada.
+**Recomendamos** que sua conexão esteja sendo feita sob **SSL** (https). Usamos uma criptografia RSS com chave publica/privada de, pelo menos, 2048 bits.
 
+Imaginando que a API seja acessada no endereço "http[s]://site.com/nac/", o ciclo inicial de conexão é estabelecido da seguinte forma:
 
 Chamada | Método | Cliente | Servidor
 --------|--------|---------|---
-getkey|GET|solicita|envia a chave pública RSS 
-login|POST|envia o login, senha e token criptografados com a chave pública|processa o login e retorna error/success (+ dados)
+site.com/nac|GET|Solicita|Envia a chave pública RSS 
+site.com/nac/login|POST|Envia o login, senha e SKey criptografados com a chave pública|processa o login (retorna error/success + dados)
 
 Vamos analizar o passo-a-passo do processo de login.
 
-1. O Client solicita a chave pública (getkey);
-2. Obtém o login e senha do usuário;
-3. Gera uma chave aleatória para o próximo degrau de segurança (AES) com até 40 caracteres (token);
+1. O Client solicita a chave pública ([GET] ```http[s]://site.com/nac/key``` ou ```http[s]://site.com/nac```);
+2. Obtém o login e senha do usuário (formulário html, etc);
+3. Gera uma chave aleatória para o próximo degrau de segurança (AES) com até 40 caracteres (SKey);
 4. Empacota (RSS) esses três parâmetros, codificando em Base64, para transporte HTTP;
-5. Envia usando método POST (login);
-6. Recebe o resultado do processo de autenticação: **error** ou **success**.
+5. Envia o bloco de dados para o servidor ([POST] ```http[s]://site.com/nac/login```);
+6. Recebe o resultado do processo de autenticação: **error** ou **success** (+dados).
 
-O resultado é formatado em JSON e, além da flag (error/succes) também retorna dados do processo de login.
+O resultado pode ser um ```Error 400``` (vazio) ou uma string com o seguinte formato:
+
+**TOKEN**: uma sequência de caracteres alpha numéricos que pode ser dividida em duas sub partes:
+
+1. **TM**: um número que representa um inteiro único (time stamp + tick), no formato CAN*;
+
+2. **TRASH**: uma sequencia aleatória de caracteres terminada em um dos seguintes caracteres: "%$#&Ç".
+
+**BODY**: dados criptografados em AES em formato Base64 contendo a informação.
+
+ formatado em JSON e, além da flag (error/succes) também retorna dados do processo de Login.
 
 Error|Dados
 ---|---
-True|o parametro "msg" contém a mensagem de erro
+True|o parametro "msg" contém a mensagem de erro (opcional)
 False|vários parâmetros com informações do usuário e o **token** de AES para o próximo acesso
+Void|opcionalmente, em caso de erro, o retorno pode ser vazio sob a indicação HTTP 400 (pedido incorreto)
 
-Os parâmetros com as informações do usuário, por padrão, são os seguintes:
+Os parâmetros esperados do servidor, por padrão, são os seguintes:
 
-* User ID;
-* User Name;
-* User Level.
+Parametro|Local|Opcional|Função
+---|---|---|---
+TOKEN | Cabeçalho da mensagem retornada | Não | Identifica o usuário conectado em ambos os lados
+SKEY | Corpo (criptografado AES) | Sim | Indica uma troca de SKEY forçada pelo servidor
+ACTION | Corpo | Não | Indica a função a ser usada para tratar a solicitação (server side)
+DATA | Corpo | Sim | Dados da aplicação (resposta) ou parâmetros da ACTION (requisição)
 
-Outros parâmetros podem ser inseridos conforme as necessidades específicas do projeto desenvolvido ou solicitando diretamente a API do servidor, em chamada posterior.
 
 ## Ping & Pong
 Para manter o usuário com status de conectado e, consequentemente o **token** válido, é necessário fazer uma chamada ao servidor NAC em um determinado intervalo de tempo. Isso é necessário caso não haja nenhuma outra atividade com o servidor dentro desse período de tempo.
