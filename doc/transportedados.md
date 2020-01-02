@@ -13,7 +13,7 @@ getkey|GET|https://server.nac/key
 
 Até aqui tudo normal. 
 
-Mas, agora vamos considerar que já estamos logados e os dados devam trafegar encriptografadoa. Logicamente, não podemos fazer o transporte dos dados diretamente no método GET. Esporíamos parte da informação.
+Mas, agora vamos considerar que já estamos logados e os dados devam trafegar encriptografados. Logicamente, não podemos fazer o transporte dos dados diretamente no método GET. Esporíamos parte da informação.
 
 ### Então, como seria?
 
