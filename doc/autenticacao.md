@@ -59,6 +59,8 @@ ping|GET|solicita|retorna o **token** (+dados extras)
 
 Os *"dados extras"* são opcionais e, dependendo da aplicação, para a notificação de novas mensagens e avisos do sistema.
 
-O **ping** só é relevante nas aplicações do tipo *unilaterais*, onde a ação sempre parte do cliente para o servidor (web tradicional). Para os casos os outros casos é preferível uma conexão permanente com SOCKETS. Veja mais detalhes em [Tipo de conexão](https://github.com/w5team/NAC/blob/master/doc/tipoconexao.md).
+O **ping** só é relevante nas aplicações do tipo *unilaterais*, onde a ação sempre parte do cliente para o servidor (web tradicional). Para os outros casos é preferível uma conexão permanente com SOCKETS. 
+
+Veja mais detalhes em [Tipo de conexão](https://github.com/w5team/NAC/blob/master/doc/tipoconexao.md).
 
 
